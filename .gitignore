@@ -1,6 +1,6 @@
 backup
 media/
-settings/local.py
+dora/settings/local.py
 
 *.pyc
 *.bak
