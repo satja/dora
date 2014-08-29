@@ -17,7 +17,7 @@ satja = User.objects.get(username='satja')
 # Ubacit cemo i satjin profil u bazu.
 try:
     satjin_profil = Profil(user=satja, ime='Adrian Satja',
-                           prezime='Kurdija', spol='m', moto='lalala')
+                           prezime='Kurdija', spol='m')
     satjin_profil.save()
 except:
     print 'satjin profil, izgleda, vec je ubacen'
