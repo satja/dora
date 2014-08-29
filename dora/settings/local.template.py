@@ -1,5 +1,7 @@
 """Template za lokalne postavke, koje moraju biti skrivene."""
 
+import os
+
 ADMINS = (
     #  ('Pajo Patak', 'pajopatak@gmail.com'),
 )
@@ -27,7 +29,10 @@ DATABASES = {
     }
 }
 
-# Registracijske postavke.
+# Use this for development:
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(PROJECT_ROOT, "local", "email")
+
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = ''

@@ -2,6 +2,7 @@ backup
 media/
 dora/settings/local.py
 
+*.ropeproject/
 *.pyc
 *.bak
 *~
