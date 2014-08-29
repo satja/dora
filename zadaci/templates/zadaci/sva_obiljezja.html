@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Sva obilježja{% endblock title %}
+
+{% block content %}
+<h2>Sva obilježja</h2>
+
+<p>
+    Sortirana po broju zadataka u kojima se pojavljuju.  Koristite Ctrl + f za pretragu.
+</p>
+<p>
+    Tablica najvažnijih obiljezja nalazi se na <a class='info' href="/">početnoj</a>.
+</p>
+<div class="tag-cloud">
+    {% load tag_cloud %}
+    {% tag_cloud_for_model zadaci.Zadatak as tags %}
+    {% regroup tags|dictsort:"count" by count as sorted_tags %}
+    <ul>
+        {% for count in sorted_tags reversed %}
+        {% for tag in count.list %}
+        <li><a href="/zadaci/?obiljezja={{tag}}">{{ tag }}</a></li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}
+

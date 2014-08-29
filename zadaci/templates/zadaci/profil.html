@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Profil [{{profil.user}}]{% endblock title %}
+
+{% load replace %}
+
+{% block content %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<div class="siroki_div">
+    <h2>
+        {{ profil.ime }}
+        {{ profil.prezime }}
+        [{{ profil.user.username }}]
+    </h2>
+    <div class='dio_profila'>
+        {% if user.profil == profil %}
+        <div class='info'><a href='/uredi_profil/'>Uredi profil</a></div>
+        {% endif %}
+
+        {% if profil.website %}
+        <div class='info'>
+            Website: <a href="{{profil.website}}">{{profil.website}}</a>
+        </div>
+        {% endif %}
+
+        {% if profil.moto %}
+        <div class='info'>
+            Moto: <span>{{profil.moto}}</span>
+        </div>
+        {% endif %}
+
+        <div class='info'>
+            Registriran/a: <span>{{profil.vrijeme_registracije}}</span>
+        </div>
+        <div class='info'>
+            Dodani zadaci:
+            {% if not dodao %} -- {% endif %}
+            {% for zadatak in dodao %}
+                <a class='obiljezje' href="/zadatak/{{zadatak.pk}}">{{ zadatak.ime }}</a> --
+            {% endfor %}
+        </div>
+        <div class='info'>
+            Komentirani zadaci:
+            {% if not komentirao %} -- {% endif %}
+            {% for zadatak in komentirao %}
+                <a class='obiljezje' href="/zadatak/{{zadatak.pk}}">{{ zadatak.ime }}</a> --
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if profil.slika %}
+    <img id='profilna_slika' src="{{ profil.slika.url }}"/>
+    {% endif %}
+
+    <div>
+        <div class='info profilni_zadaci'>
+            TODO zadaci: 
+            <ul>
+                {% for zadatak in todo %}
+                    <li><a href="/zadatak/{{zadatak.pk}}">{{ zadatak.ime }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class='info profilni_zadaci'>
+            Riješeni zadaci: 
+            <ul>
+                {% for zadatak in rijesio %}
+                    <li><a href="/zadatak/{{zadatak.pk}}">{{ zadatak.ime }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class='info profilni_zadaci'>
+            Najdraži zadaci: 
+            <ul>
+                {% for zadatak in najdrazi %}
+                    <li><a href="/zadatak/{{zadatak.pk}}">{{ zadatak.ime }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class='nedavno'>
+    <h3>Nedavne aktivnosti korisnika</h3>
+    <ul>
+        {% for aktivnost in nedavno %}
+        <li><a class='info' href='/profil/{{aktivnost.user.profil.pk}}'>{{aktivnost.user.username}}</a>
+        {% if aktivnost.user.profil.spol == "f" %}
+        {{aktivnost.get_tip_aktivnosti_display|replace:"/ao/ala/g"|replace:"/io/ila/g"}}
+        {% else %}
+        {{aktivnost.get_tip_aktivnosti_display}}
+        {% endif %}
+        <a class='info' href='/zadatak/{{aktivnost.zadatak.pk}}'>{{aktivnost.zadatak.ime}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

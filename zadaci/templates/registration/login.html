@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block prijava %}
+{% endblock prijava %}
+
+{% block content %}
+
+<h2>Prijava</h2>
+
+{% if user.is_authenticated %}
+
+<div class="info">Prijavljeni ste kao
+    <a href="/profil/{{user.profil.pk}}" class="korisnicko_ime">{{user}}</a>.
+</div>
+<a href="/">Skok na pocetnu</a>
+
+{% else %}
+
+<div class='errors'>
+    {{form.non_field_errors}}
+</div>
+
+<form method="post" action="?next={{ next|default:"/" }}">
+    {% csrf_token %}
+    <div class='info'>
+        Korisničko ime: {{ form.username }}
+        {% if form.username.errors %}
+            <span class="errors">{{ form.username.errors|join:", " }}</span>
+        {% endif %}
+    </div>
+    <div class='info'>
+        Lozinka: {{ form.password }}
+        {% if form.password.errors %}
+            <span class="errors">{{ form.password.errors|join:", " }}</span>
+        {% endif %}
+    </div>
+    <div><input class='sire_dugme' type="submit" value="Prijava" /></div>
+    </div>
+</form>
+
+<div class='nemas_racun'>
+    Nemaš račun? <a class='info obiljezje' href="/accounts/register/">Registriraj se!</a>
+</div>
+
+{% endif %}
+{% endblock %}
+

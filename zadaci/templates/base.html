@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        {% load staticfiles %}
+        {% load dajaxice_templatetags %}
+        {% dajaxice_js_import %}
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'stil.css' %}">
+        <title>{% block title %}Dora - Metaarhiva informatičkih zadataka{% endblock title %}</title>
+        <meta name="content-language" content="hr">
+        <meta name="description" content="
+        Dora je edukativna stranica koja služi kao pomoć
+        osnovnoškolcima, srednjoškolcima i studentima pri učenju algoritama i
+        pripremi za informatička natjecanja. To je baza podataka o
+        zadacima s raznih natjecanja i online-judgeva koje
+        je moguće pretraživati po njihovim obilježjima, od najjednostavnijih
+        do najsloženijih tema. Korisnike će dodatno motivirati
+        označavanje zadataka koje su riješili, kao i označavanje
+        najdražih te TODO zadataka.">
+    </head>
+    <body>
+        <div class="header">
+            <span class="naslov">Dora;</span>
+            <span class="meta">// metaarhiva dobrih zadataka</span>
+            <div class="coded_by mali_tekst">
+                <div>Proizveo: <a href="mailto:askurdija@gmail.com">Adrian Satja Kurdija</a></div>
+                <div>Ideja preuzeta od <a href="http://skoljka.org">Školjke</a> (by Ivica Kičić)</div>
+            </div>
+        </div>
+        <div class="izbornik">
+            <ul class="navig">
+                <li class="na_pocetnu"><a href="/">Pretraga</a></li>
+                <li><a href="/dodaj/">Dodaj zadatak</a></li>
+                <li><a href="/zadaci/">Svi zadaci</a></li>
+                <li><a href="/random/">Slučajan zadatak</a></li>
+                <li><a href="/obiljezja/">Sva obilježja</a></li>
+                {# <li><a href="/tutorijali/">Tutorijali</a></li> #}
+                <br/>
+                <li><a href="/korisnici/">Korisnici</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/profil/{{user.profil.pk}}">Moj profil
+                    <span class="korisnicko_ime">[{{ user.username }}]</span>
+                </a></li>
+                <li><a href="/odjava/">Odjava</a></li>
+                {% else %}
+                <li><a href="/accounts/register/">Registriraj se!</a></li>
+                {% endif %}
+            </ul>
+            {% block prijava %}
+            {% if not user.is_authenticated %}
+            <h3>Prijava</h3>
+            <form method="post" action="/accounts/login/?next={{request.path}}"/>
+                {% csrf_token %}
+                <input type="text" id="id_username" name='username' size="20" placeholder="$ Korisnicko ime"/>
+                <input type="password" id="id_password" name='password' size="20" placeholder="$ Lozinka"/>
+                <input type="submit" value="Prijava"/>
+            </form>
+            {% endif %}
+            {% endblock prijava %}
+         </div>
+         <div class="sadrzaj">
+             {% block content %}
+             {% endblock content %}
+         </div>
+    </body>
+</html>

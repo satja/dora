@@ -1,0 +1,356 @@
+html * {
+    font-family: monospace;
+    color: white;
+}
+
+body {
+    background-color: #300A24;
+    font-size: 9.5pt;
+}
+
+.header {
+    border: 1px solid;
+    border-color: #99FF00;
+    padding: 1em;
+}
+
+.naslov {
+    font-size: 35px;
+    color: #99FF00;
+    font-weight: bold; 
+}
+
+.coded_by {
+    position: absolute;
+    top: 2.5em;
+    right: 3em;
+    font-size: 8pt;
+}
+
+.meta {
+    font-size: 25px;
+    font-style: italic;
+    margin: 1em;
+}
+
+.izbornik {
+    width: 15em;
+    float: left;
+    padding: 1em;
+}
+
+.siroki_div {
+    position: relative;
+    float: left;
+    width: 65em;
+}
+
+.sadrzaj {
+    display: block;
+    overflow: hidden;
+    padding: 1em;
+}
+
+.nedavno {
+    width: 20em;
+    float: left;
+    margin-left: 1em;
+}
+
+.nedavno li {
+    margin-top: 1.4em;
+}
+
+
+.trazi {
+    margin-left: 4em;
+}
+
+input {
+    color: #300A24;
+    display: block;
+}
+
+#id_username {
+    width: 10em;
+    margin-left: 2px;
+}
+
+#id_password {
+    width: 10em;
+    margin-left: 2px;
+}
+
+button {
+    color: #300A24;
+}
+
+.navig {
+    margin-bottom: 2em;
+}
+
+.prijavljeni_ste {
+    padding: 1em;
+    font-size: 11pt;
+}
+
+select {
+    background: transparent;
+}
+
+option {
+    color: black;
+    background-color: white;
+}
+
+h2 {
+    color: #99FF00;
+}
+
+h3 {
+    color: #99FF00;
+}
+
+.korisnicko_ime {
+    color: #99FF00;
+}
+
+#obiljezja {
+    display: none;
+}
+
+.uvuci {
+    margin: 1em;
+}
+
+#komentari {
+    margin-top: 1.5em;
+}
+
+#id_comment {
+    background: transparent;
+    height: 100px;
+    width: 550px;
+}
+
+#id_submit {
+    width: 10em;
+    margin-bottom: 2em;
+}
+
+.komentar {
+    margin: 1em;
+    margin-bottom: 2em;
+}
+
+.skriven {
+    display: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+li {
+    margin: 0 0 6px 0;
+}
+
+ul li:before {
+    color: #99FF00;
+    content: "\24";
+    margin: .5em;
+    font-weight: bold; 
+}
+
+.ui-autocomplete li:before {
+    height: 0px;
+    width: 0px;
+    content: "";
+    margin: 0px;
+}
+
+#order_izbor {
+    margin-top: 2em;
+}
+
+.legenda {
+    font-style: italic;
+    margin: 1em 0 1em 0;
+}
+
+#zadatak_form {
+    margin-top: 1em;
+}
+
+.tablica_zadataka {
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+}
+
+.dolar {
+    color: #99FF00;
+    font-weight: bold; 
+}
+
+.pipe {
+    color: #99FF00;
+}
+
+.info {
+    color: #99FF00;
+    text-decoration: none;
+    margin-bottom: 1em;
+}
+
+.dodan {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.obiljezje {
+    text-decoration: none;
+}
+
+.paginacija {
+    margin-top: 1em;
+}
+
+.stupac_oznaka {
+    width: 150px;
+}
+
+.stupac_polja_profila {
+    width: 100px;
+}
+
+.ako_vec_imas {
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.zadatak_tablica {
+    margin-top: -1em;
+    margin-left: -15px;
+    border-collapse: separate;
+    border-spacing: 15px 1em;
+}
+
+li a {
+    text-decoration: none;
+}
+
+.na_pocetnu {
+    font-weight: bold;
+}
+
+.dio_profila {
+    min-height: 10em;
+    width: 49em;
+}
+
+.osnovna_obiljezja {
+    margin-top: 1em;
+    width: 65em;
+    overflow: hidden;
+}
+
+.osnovna_obiljezja ul {
+    margin-bottom: 2em;
+}
+
+.osnovna_obiljezja .stupac {
+    float: left;
+    width: 25%;
+}
+
+.polovina {
+    float: left;
+    width: 50%;
+}
+
+.sto_je_dora {
+    float: left;
+    width: 45%;
+    margin-top: 3px;
+}
+
+#profilna_slika {
+    max-width: 13em;
+    max-height: 13em;
+    position: absolute;
+    top: 2em;
+    right: 2em;
+}
+
+.profilni_zadaci {
+    padding: 1em;
+    float: left;
+    width: 30%;
+    border: 1px solid;
+}
+
+.checkbox {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+.na_listu {
+    padding: 2px;
+    border: 1px solid;
+    border-color: #99FF00;
+}
+
+.sire_dugme {
+    width: 8em;
+}
+
+.upute li {
+    width: 600px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.link {
+    text-decoration: underline;
+}
+
+.desno {
+    float: right;
+}
+
+.lista {
+    margin: 1em;
+}
+
+.wide label {
+    color: #99FF00;
+}
+
+.errors {
+    color: red;
+}
+
+.errors ul li {
+    color: red;
+}
+
+.nemas_racun {
+    margin-top: 2em;
+}
+
+.profil_polje input[type=file], input[type=checkbox] {
+    color: white;
+    display: inline;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.upute .info {
+    font-weight: bold;
+}
+
+#dodaj_dugme {
+    margin-left: 2px;
+}

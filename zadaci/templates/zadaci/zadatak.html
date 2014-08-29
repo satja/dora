@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% load range %}
+{% load comments %}
+
+{% block title %}Zadatak {{zadatak.ime}}{% endblock title %}
+
+{% block content %}
+<h2>{{ zadatak.ime }}</h2>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<script type="text/javascript">
+    // Popuni korisnikove trenutne preferencije za ovaj zadatak.
+    function onPageLoad() {
+        document.getElementById("lista").value = "{{lista}}";
+        document.getElementById("tezina").value = "{{tezina}}";
+        document.getElementById("kvaliteta").value = "{{kvaliteta}}";
+    }
+    // Nakon glasovanja azuriraju se vrijednosti (prosjecan glas i broj glasova).
+    function glasuj_callback(data) {
+        document.getElementById(data.tip_glasa + "_ukupno").innerHTML = data.vrijednost;
+        document.getElementById(data.tip_glasa + "_br_glasova").innerHTML = data.br_glasova;
+    }
+    // Azurira na kojoj se korisnikovoj listi zadatak nalazi.
+    function promijeni_listu() {
+        var lista = document.getElementById('lista').value;
+        Dajaxice.zadaci.azuriraj_listu(function() {
+                    location.reload();
+                }, {
+                'zadatak_id': {{zadatak.pk}},
+                'lista': lista,
+                });
+    }
+    // Izvrsava se kada korisnik glasuje za tezinu ili kvalitetu zadatka.
+    function glasuj(tip_glasa) {
+        {% if user.is_authenticated %}
+        var glas = document.getElementById(tip_glasa).value;
+        if (glas) {
+            Dajaxice.zadaci.glasuj(glasuj_callback, {
+                    'zadatak_id': {{zadatak.pk}},
+                    'tip_glasa': tip_glasa,
+                    'glas': glas,
+                    });
+            document.getElementById(tip_glasa + "_spremljeno").innerHTML = "Spremljeno!";
+        } else {
+            document.getElementById(tip_glasa + "_spremljeno").innerHTML = "Odaberite glas!";
+        }
+        {% else %}
+        document.getElementById(tip_glasa + "_spremljeno").innerHTML =
+            "Najprije se <a href='/registracija/'>prijavi</a>."
+        {% endif %}
+    }
+    function pokazi_ili_sakrij_obiljezja() {
+        var objekt = document.getElementById('obiljezja');
+        if (objekt.style.display == 'inline') {
+            objekt.style.display = 'none';
+            document.getElementById('dugme_obiljezja').innerHTML = 'Pokaži';
+        }
+        else {
+            objekt.style.display = 'inline';
+            document.getElementById('dugme_obiljezja').innerHTML = 'Sakrij';
+        }
+    }
+    // Mice rijec 'Spremljeno!'.
+    function makni_spremljeno() {
+        document.getElementById("tezina_spremljeno").innerHTML = "";
+        document.getElementById("kvaliteta_spremljeno").innerHTML = "";
+    }
+    function obrisi_komentar(komentar_id) {
+        Dajaxice.zadaci.obrisi_komentar(function() {
+                    location.reload();
+                }, {
+                'komentar_id': komentar_id,
+                });
+    }
+    window.onload = onPageLoad;
+</script>
+
+<div>
+    {% if user.is_authenticated %}
+    <div class='info'>
+        Tvoja lista na kojoj se zadatak nalazi:
+        <select id="lista" onchange="promijeni_listu()">
+            <option value="">Nijedna</option>
+            <option value="todo">TODO zadaci</option>
+            <option value="rijesio">Riješeni zadaci</option>
+            <option value="najdrazi">Najdraži zadaci</option>
+        </select>
+    </div>
+    {% endif %}
+
+    <div class="info">Link: <a href="{{zadatak.link}}">{{zadatak.link}}</a></div>
+    <div class="info">Izvor: <span>{{zadatak.izvor}}</span></div>
+    <table class="zadatak_tablica">
+        <tr>
+            <td class="info">Težina:</span></td>
+            <td>
+                <span id='tezina_ukupno'>
+                    {% if zadatak.tezina %} {{zadatak.tezina}} {% else %} N/A {% endif %}
+                </span>
+                (glasova: <span id='tezina_br_glasova'>{{zadatak.tezina_br_glasova}}</span>)
+            </td>
+            <td class="info">
+                Moj glas:
+                <select id="tezina" onclick="makni_spremljeno()">
+                    <option selected disabled hidden value=''></option>
+                    {% for i in 11|get_range %}
+                    {% if i != 0 %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <td>
+                    <button type="button" onclick="glasuj('tezina')">Spremi</button>
+                </td>
+                <td>
+                    <span id="tezina_spremljeno" class='info'/>
+                </td>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="info">Kvaliteta:</td>
+            <td>
+                <span id='kvaliteta_ukupno'>
+                    {% if zadatak.kvaliteta %} {{zadatak.kvaliteta}} {% else %} N/A {% endif %}
+                </span>
+                (glasova: <span id='kvaliteta_br_glasova'>{{zadatak.kvaliteta_br_glasova}}</span>)
+            </td>
+            <td class="info">
+                Moj glas:
+                <select id="kvaliteta" onclick="makni_spremljeno()">
+                    <option selected disabled hidden value=''></option>
+                    {% for i in 6|get_range %}
+                    {% if i != 0 %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <td>
+                    <button type="button" onclick="glasuj('kvaliteta')">Spremi</button>
+                </td>
+                <td>
+                    <span id="kvaliteta_spremljeno" class='info'/>
+                </td>
+            </td>
+        </tr>
+        <tr>
+            <td class="info">Dodao:
+                <a class="obiljezje" href="/profil/{{zadatak.dodao.profil.pk}}">{{zadatak.dodao}}</a>
+            </td>
+            <td class="info"><span>{{zadatak.vrijeme}}<span></td>
+            {% if zadatak.dodao == user or user.is_staff %}
+            <td colspan=2>
+                <a class='desno' href="/dodaj/{{zadatak.pk}}">Uredi zadatak</a>
+            </td>
+            {% endif %}
+        </tr>
+    </table>
+
+    <div class='info'>Obilježja:
+        <button id='dugme_obiljezja' type="button" onclick="pokazi_ili_sakrij_obiljezja()">
+            Pokaži
+        </button>
+        {% load tag_cloud %}
+        {% tags_for_object zadatak as tags %}
+        <span id='obiljezja' class='info'>
+        {% for tag in tags %}
+        <a class='obiljezje' href="/zadaci/?obiljezja={{tag.name}}">{{tag.name}}</a> 
+        {% endfor %}
+        </span>
+    </div>
+
+    <div id="obiljezja">
+    </div>
+
+    <div class='info'>Korisnici koji su ovaj zadatak stavili:</div>
+    <div class='lista'>
+        Na TODO listu:
+        {% if not todo %} -- {% endif %}
+        {% for korisnik in todo %}
+        <a class='info' href="/profil/{{korisnik.profil.pk}}">{{korisnik}}</a> 
+        {% endfor %}
+    </div>
+
+    <div class='lista'>
+        Na listu riješenih:
+        {% if not rijesio %} -- {% endif %}
+        {% for korisnik in rijesio %}
+        <a class='info' href="/profil/{{korisnik.profil.pk}}">{{korisnik}}</a> 
+        {% endfor %}
+    </div>
+
+    <div class='lista'>
+        Na listu najdražih:
+        {% if not najdrazi %} -- {% endif %}
+        {% for korisnik in najdrazi %}
+        <a class='info' href="/profil/{{korisnik.profil.pk}}">{{korisnik}}</a> 
+        {% endfor %}
+    </div>
+</div>
+
+<div id='komentari'>
+    {% if user.is_authenticated %}
+        {% get_comment_form for zadatak as form %}
+        <form action="{% comment_form_target %}" method="POST">
+        {% csrf_token %}
+        <div class='info'>
+            Dodaj komentar:
+        </div>
+        {{ form.comment }}
+        <div class='skriven'>{{ form.honeypot }}</div>
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="hidden" name="next" value="/zadatak/{{zadatak.pk}}"/>
+        <input type="submit" value="Pošalji" id="id_submit"/>
+        </form>
+    {% else %}
+        <p>Da biste mogli komentirati zadatak, morate se <a href="/accounts/login/?next={{request.path}}">prijaviti</a>.</p>
+    {% endif %}
+
+    <h3>Komentari</h3>
+    {% get_comment_list for zadatak as komentari %}
+    {% if not komentari %}
+        Još nema komentara.
+    {% else %}
+        {% for komentar in komentari reversed %}
+            <a class='info' href='/profil/{{komentar.user.profil.pk}}'>{{komentar.user_name}}</a>
+            {{komentar.submit_date}}
+            {% if user.is_staff or user == komentar.user %} 
+                <a href="javascript:obrisi_komentar({{komentar.pk}})">Obriši komentar</a>
+            {% endif %}
+            <div class='komentar'>{{komentar.comment}}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

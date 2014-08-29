@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h3>Aktivacija računa</h2>
+  {% if account %}
+  Hvala ti na registraciji! Prijavi se koristeći formu u izborniku lijevo.
+  {% else %}
+  Tvoj aktivacijski kod je već unesen, ili je netočan, ili je istekao.
+  {% endif %}
+{% endblock %}

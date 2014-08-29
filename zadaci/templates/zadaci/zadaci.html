@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load ordered_listview %}
+{% load paginate_with_get %}
+
+{% block title %}Zadaci{% endblock title %}
+
+{% block content %}
+
+{% if request.GET.obiljezja or request.GET.ime or request.GET.link or request.GET.izvor or request.GET.tezina_min or request.GET.tezina_max %}
+<h2>Rezultati pretrage</h2>
+
+{% if request.GET.obiljezja %}
+<div>Tražena obilježja: <span class='info'>{{request.GET.obiljezja}}</span></div>
+{% endif %}
+
+{% else %}
+<h2>Svi zadaci</h2>
+{% endif %}
+
+{% if zadaci %}
+Sortiraj po:
+<script type="text/javascript">
+    function replaceUrlParam(url, paramName, paramValue) {
+       var pattern = new RegExp('('+paramName+'=).*?(&|$)') 
+       var newUrl = url.replace(pattern,'$1' + paramValue + '$2');
+       if(newUrl == url){
+           newUrl = newUrl + (newUrl.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue 
+       }
+       return newUrl
+    }
+    function promijeni_poredak(){
+        var select = document.getElementById("order_izbor");
+        var novi_poredak = select.options[select.selectedIndex].value;
+        window.location = replaceUrlParam(document.URL, 'by', novi_poredak);
+    }
+</script>
+<select id='order_izbor' onchange="promijeni_poredak()">
+  {% for key, val in order_by_fields.iteritems %}
+  <option class='order_izbor' value="{{key}}" {% if order_by_field == key %} selected {% endif %}>{{val}}</option>
+  {% endfor %}
+</select>
+<div class="legenda">Težina | Kvaliteta | Zadatak</div>
+    <table class="tablica_zadataka">
+    {% for zadatak in zadaci %}
+    <tr>
+        <td>
+            <span class="dolar">$</span>
+        </td>
+        <td>
+                {% if zadatak.tezina %}
+                    {{zadatak.tezina}}
+                {% else %}
+                    N/A
+                {% endif %}
+        </td>
+        <td class="pipe">|</td>
+        <td>
+                {% if zadatak.kvaliteta %}
+                    {{zadatak.kvaliteta}}
+                {% else %}
+                    N/A
+                {% endif %}
+        </td>
+        <td class="pipe">|</td>
+        <td>
+            <a href="/zadatak/{{ zadatak.id }}/" class="info">{{ zadatak.ime }}</a></li>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    {# Paginacija #}
+    {% if is_paginated %}
+        <div class="paginacija">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                <a href="{% append_to_get page=page_obj.previous_page_number %}">Prethodna</a>
+                {% endif %}
+                <span class="page-current">
+                    Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                <a href="{% append_to_get page=page_obj.next_page_number %}">Sljedeca</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% else %}
+<p>
+    Još nema takvih zadataka. <a href="/dodaj/">Dodaj zadatak</a>
+</p>
+{% endif %}
+
+{% endblock content %}

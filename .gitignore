@@ -1,0 +1,10 @@
+backup
+media/
+settings/local.py
+
+*.pyc
+*.bak
+*~
+*.swp
+
+Thumbs.db

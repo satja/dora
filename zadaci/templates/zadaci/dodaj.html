@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Dodaj/uredi zadatak{% endblock title %}
+
+{% block content %}
+{% if uspjeh == 'izmijenio' %}
+<div class='info dodan'>
+    Zadatak <a href='/zadatak/{{zadatak.pk}}'>{{zadatak.ime}}</a> uspješno je izmijenjen!
+</div>
+{% endif %}
+{% if uspjeh == 'dodao' %}
+<div class='info dodan'>
+    Zadatak <a href='/zadatak/{{zadatak.pk}}'>{{zadatak.ime}}</a> uspješno je dodan!
+</div>
+{% endif %}
+
+{% if not izmjena %}
+<h2>Dodaj zadatak</h2>
+Najprije <a href="/">provjeri</a> je li zadatak već u arhivi.
+{% else %}
+<h2>Uredi zadatak</h2>
+{% endif %}
+
+<form id="zadatak_form" method="post" action=".">
+    {% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+    <table>
+        <col class="stupac_oznaka">
+        <col class="stupac_inputa">
+        <col class="stupac_errora">
+        {% for field in form.visible_fields %}
+        <tr>
+            <td class="info">{{ field.label }}</td>
+            <td>{{ field }}</td>
+            <td>{{ field.errors }}</td>
+        </tr>
+        {% endfor %}
+
+        {% if izmjena %}
+        <tr>
+            <td class="info">Brisanje?</td>
+            <td>
+                <input type='checkbox' name='obrisi' value='da'>Obriši zadatak.
+                <input type='checkbox' name='sigurno_obrisi' value='da'>Da, sigurno želim obrisati ovaj zadatak.
+            </td>
+        </tr> 
+        {% endif %}
+
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input id='dodaj_dugme' class='sire_dugme' type="submit" name="submit" {% if not izmjena %} value='Dodaj' {% else %} value="Izmijeni {% endif %}"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<div>
+    <h3>Upute</h3>
+    <ul class='upute'>
+        <li><span class='info'>Izvor.</span>
+        <span>
+            Radi lakšeg pronalaženja zadatka, izvor treba biti što informativniji.
+            Na primjer, umjesto <i>Infokup</i> treba pisati <i>Infokup 2014., Državno natjecanje, 6. razred</i>.
+        </span>
+        </li>
+        <li><span class='info'>Težina.</span>
+        <span>
+            Težine od 1 do 8 načelno odgovaraju težinama zadataka od 1. do 8. na
+            <a class='link' href="http://hsin.hr/honi">HONI natjecanju</a>.
+        </span>
+        </li>
+        <li><span class='info'>Obilježja.</span></li>
+
+        <li>Prilikom dodavanja obilježja koristite zdrav razum. Načelno je pravilo da je obilježje je prikladno za zadatak ako zadovoljava
+        <i>barem jedan</i> od sljedećih uvjeta:
+        <ul class='uvuci'>
+            <li>zadatak je prikladan za korisnika koji pretražuje po tom obilježju,</li>
+            <li>dotično obilježje može biti hint za rješenje zadatka.</li>
+        </ul>
+        </li>
+
+        <li>Primjerice, u većini zadataka potrebni su nizovi, ali obilježje <i>nizovi</i> nema smisla dodati
+        u zadatak koji traži mnogo veće znanje (npr. <i>grafovi</i>).
+
+        <li>Analogno, onaj tko pretražuje <i>if-then-else</i> vjerojatno još ne traži zadatak s <i>for-petljom</i>. Stoga u takav zadatak
+        nema smisla staviti obilježje <i>if-then-else</i> (ono nije ni hint jer se podrazumijeva).
+        </li>
+
+        <li>Dobro je dodati i općenita i određenija obiljezja.
+        Na primjer, uz <i>vezana-lista</i> valja dodati <i>strukture-podataka</i>,
+        a uz <i>floyd-warshall</i> valja dodati <i>grafovi</i>.</li>
+    </ul>
+</div>
+{% endblock content %}

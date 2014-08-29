@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load range %}
+{% load replace %}
+
+{% block content %}
+
+
+<div class='siroki_div'>
+    <div class='polovina'>
+        <h2>Pretraži zadatke</h2>
+        <form id="pretraga" method="get" action="/zadaci/">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            <table>
+                <tr>
+                    <td class="zadatak_info">Obilježja:</td>
+                    <td>
+                        {% for polje in obiljezja.visible_fields %}
+                        {{ polje }}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zadatak_info">Ime sadrži:</td>
+                    <td><input type='text' name='ime'/></td>
+                </tr>
+                <tr>
+                    <td class="zadatak_info">Link sadrži:</td>
+                    <td><input type='text' name='link' placeholder="npr. spoj"/></td>
+                </tr>
+                <tr>
+                    <td class="zadatak_info">Izvor sadrži:</td>
+                    <td><input type='text' name='izvor' placeholder="npr. HONI"/></td>
+                </tr>
+                <tr>
+                    <td class="zadatak_info">Minimalna težina:</td>
+                    <td>
+                        <select name="tezina_min">
+                            <option selected disabled hidden value=''></option>"
+                            {% for i in 11|get_range %}
+                            {% if i != 0 %}
+                            <option value="{{i}}">{{i}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zadatak_info">Maksimalna težina:</td>
+                    <td>
+                        <table><tr>
+                            <td>
+                                <select name="tezina_max">
+                                    <option selected disabled hidden value=''></option>"
+                                    {% for i in 11|get_range %}
+                                    {% if i != 0 %}
+                                    <option value="{{i}}">{{i}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input class='trazi' type="submit" name="submit" value="Traži!"/>
+                            </td>
+                        </tr></table>
+                    </td>
+                </tr>
+                </tr>
+            </table>
+        </form>
+    </div>
+    {% if not user.is_authenticated %}
+    <div class='sto_je_dora'>
+        <h2>Što je Dora?</h2>
+        Dora je edukativna stranica koja služi kao pomoć
+        osnovnoškolcima, srednjoškolcima i studentima pri učenju algoritama i
+        pripremi za informatička natjecanja. To je baza podataka o
+        zadacima s raznih natjecanja i online-judgeva koje
+        je moguće pretraživati po njihovim obilježjima, od najjednostavnijih
+        do najsloženijih tema. Korisnike će dodatno motivirati
+        označavanje zadataka koje su riješili, kao i označavanje
+        najdražih te TODO zadataka.
+    </div>
+    {% endif %}
+    <div class="osnovna_obiljezja">
+    <h2>Pretraži po obilježju</h2>
+        <div class='stupac'>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=ad-hoc">ad-hoc</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=osnovnoskolski">osnovnoskolski</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=osnovne-operacije">osnovne-operacije</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=if-then-else">if-then-else</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=for-petlja">for-petlja</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=while-petlja">while-petlja</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=znamenke">znamenke</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=nizovi">nizovi</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=stringovi">stringovi</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=matrice">matrice</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=simulacija">simulacija</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=greedy">greedy</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=rekurzija">rekurzija</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=binary-search">binary-search</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=ternary-search">ternary-search</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=sweep">sweep</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=divide-and-conquer">divide-and-conquer</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=meet-in-the-middle">meet-in-the-middle</a></li>
+            </ul>
+        </div>
+        <div class='stupac'>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=dinamika">dinamika</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=rekonstrukcija">rekonstrukcija</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=bitmaske">bitmaske</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=potenciranje-matrice">potenciranje-matrice</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=envelope">envelope</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=matematika">matematika</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=kombinatorika">kombinatorika</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=fui">fui</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=igre">igre</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=vjerojatnost">vjerojatnost</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=geometrija">geometrija</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=konveksna-ljuska">konveksna-ljuska</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=gaussova-eliminacija">gaussova-eliminacija</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=bignum">bignum</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=teorija-brojeva">teorija-brojeva</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=prosti-brojevi">prosti-brojevi</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=eratostenovo-sito">eratostenovo-sito</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=brzo-potenciranje">brzo-potenciranje</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=modularni-inverz">modularni-invez</a></li>
+            </ul>
+        </div>
+        <div class='stupac'>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=grafovi">grafovi</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=flood_fill">flood_fill</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=dfs">dfs</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=bfs">bfs</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=0-1-bfs">0-1-bfs</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=dijkstra">dijkstra</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=floyd-warshall">floyd-warshall</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=minimum-spanning-tree">minimum-spanning-tree</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=union-find">union-find</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=eulerov-put">eulerov-put</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=matching">matching</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=flow">flow</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=tarjan">tarjan</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=dfs-stablo">dfs-stablo</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=nestandardni">nestandardni</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=interaktivni">interaktivni</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=output-only">output-only</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=challenge">challenge</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=heuristika">heuristika</a></li>
+            </ul>
+        </div>
+        <div class='stupac'>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=strukture-podataka">strukture-podataka</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=stack">stack</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=set">set</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=heap">heap</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=logaritamska">logaritamska</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=tournament">tournament</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=ortogonalna">ortogonalna</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=splay">splay</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=2d-logaritamska">2d-logaritamska</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=vezana-lista">vezana-lista</a></li>
+            </ul>
+            <ul>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=lca">lca</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=dag">dag</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=topoloski-sort">topoloski-sort</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=hash">hash</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=trie">trie</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=kmp">kmp</a></li>
+                <li><a class='obiljezje' href="/zadaci/?obiljezja=hungarian">hungarian</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class='nedavno'>
+    <h3>Nedavne aktivnosti</h3>
+    <ul>
+        {% for aktivnost in nedavno %}
+        <li><a class='info' href='/profil/{{aktivnost.user.profil.pk}}'>{{aktivnost.user.username}}</a>
+        {% if aktivnost.user.profil.spol == "f" %}
+        {{aktivnost.get_tip_aktivnosti_display|replace:"/ao/ala/g"|replace:"/io/ila/g"}}
+        {% else %}
+        {{aktivnost.get_tip_aktivnosti_display}}
+        {% endif %}
+        <a class='info' href='/zadatak/{{aktivnost.zadatak.pk}}'>{{aktivnost.zadatak.ime}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

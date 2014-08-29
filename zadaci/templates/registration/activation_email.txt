@@ -1,0 +1,8 @@
+Hvala ti na registraciji!
+
+Za aktivaciju svojega korisničkog računa klikni na sljedeću poveznicu:
+
+http://{{ site.get_host }}/accounts/activate/{{ activation_key }}/
+http://127.0.0.1:8000/accounts/activate/{{ activation_key }}/
+
+Želimo ti dobru zabavu!

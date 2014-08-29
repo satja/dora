@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="prijavljeni_ste">Prijavljeni ste kao
+    <a href="/profil/{{user.profil.pk}}" class="korisnicko_ime">{{ user.username }}</a>.
+</div>
+    <a href="/">Skok na početnu</a>
+
+{% else %}
+
+<p class='ako_vec_imas'>Ako već imaš račun, prijavi se koristeći formu za prijavu u izborniku lijevo.</p>
+
+<h2>Registracija</h2>
+
+<div class='errors'>{{ form.non_field_errors }}</div>
+
+  <form method="post" action="" class="wide">
+	{% csrf_token %}
+    <p>
+      <label for="id_username">Korisničko ime:</label>
+      {% if form.username.errors %}
+        <p class="errors">{{ form.username.errors.as_text }}</p>
+      {% endif %}
+      {{ form.username }}
+    </p>
+    <p>
+      <label for="id_email">E-mail adresa:</label>
+      {% if form.email.errors %}
+        <p class="errors">{{ form.email.errors.as_text }}</p>
+      {% endif %}
+      {{ form.email }}
+    </p>
+    <p>
+      <label for="id_password1">Lozinka:</label>
+      {% if form.password1.errors %}
+        <p class="errors">{{ form.password1.errors.as_text }}</p>
+      {% endif %}
+      {{ form.password1 }}
+    </p>
+    <p>
+      <label for="id_password2">Lozinka (ponovno):</label>
+      {% if form.password2.errors %}
+        <p class="errors">{{ form.password2.errors.as_text }}</p>
+      {% endif %}
+      {{ form.password2 }}
+    </p>
+    <p class="submit"><input type="submit" value="Registracija &rarr;"></p>
+  </form>
+  
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Svi korisnici{% endblock title %}
+
+{% block content %}
+<h2>Korisnici</h2>
+{% if profili %}
+<p>Sortirani po broju dodanih zadataka.</p>
+    <ul>
+    {% regroup profili by user.dodao.count as sortirani_korisnici %}
+    {% for count in sortirani_korisnici %}
+    {% for profil in count.list %}
+        <li><a href="/profil/{{ profil.pk }}/">{{ profil }}</a></li>
+    {% endfor %}
+    {% endfor %}
+    </ul>
+{% else %}
+<p>Nema korisnika.</p>
+{% endif %}
+
+{% endblock content %}
