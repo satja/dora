@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
 from zadaci import views
 
 urlpatterns = patterns(
@@ -26,5 +27,8 @@ urlpatterns = patterns(
 
     # Kad korisnik aktivira svoj racun, preusmjeri ga na uredjivanje profila.
     url(r'^accounts/activate/complete/$', views.uredi_profil,
-        name='activation_complete')
+        name='activation_complete'),
+
+    url(r'^googleb1fb5ec8a1253530.html', TemplateView.as_view(
+	template_name='googleb1fb5ec8a1253530.html'))
 )
