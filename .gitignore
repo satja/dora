@@ -1,6 +1,8 @@
+dora/settings/local.py
 backup
 media/
-dora/settings/local.py
+local/
+static/
 
 *.ropeproject/*
 *.pyc
