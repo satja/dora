@@ -14,27 +14,24 @@ def azuriraj_listu(request, zadatak_id, lista):
     """
     zadatak = Zadatak.objects.get(pk=zadatak_id)
 
-    # Nadji prijasnju listu.
-    prijasnja = Aktivnost.objects.filter(
+    # Obrisi prijasnju listu.
+    Aktivnost.objects.filter(
         user=request.user, zadatak=zadatak,
-        tip_aktivnosti__in=['todo', 'rijesio', 'najdrazi'])
-    if prijasnja:
-        bivsa_lista = prijasnja[0].tip_aktivnosti
-        prijasnja.delete()
-        # Azuriraj zadatak, tj. smanji mu broj doticnih listi.
-        zadatak.br_todo -= (bivsa_lista == 'todo')
-        zadatak.br_rijesio -= (bivsa_lista == 'rijesio')
-        zadatak.br_najdrazi -= (bivsa_lista == 'najdrazi')
+        tip_aktivnosti__in=['todo', 'rijesio', 'najdrazi']).delete()
 
     # Zabiljezi novu listu.
     if lista != "":
         aktivnost = Aktivnost(user=request.user, zadatak=zadatak,
                               tip_aktivnosti=lista)
         aktivnost.save()
-        zadatak.br_todo += (lista == 'todo')
-        zadatak.br_rijesio += (lista == 'rijesio')
-        zadatak.br_najdrazi += (lista == 'najdrazi')
 
+    # Azuriraj zadatak.
+    zadatak.br_todo = Aktivnost.objects.filter(
+        zadatak=zadatak, tip_aktivnosti='todo').count()
+    zadatak.br_rijesio = Aktivnost.objects.filter(
+        zadatak=zadatak, tip_aktivnosti='rijesio').count()
+    zadatak.br_najdrazi = Aktivnost.objects.filter(
+        zadatak=zadatak, tip_aktivnosti='najdrazi').count()
     zadatak.save()
 
 
