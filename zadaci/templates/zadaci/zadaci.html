@@ -106,7 +106,7 @@ Sortiraj po:
                 Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}.
             </span>
             {% if page_obj.has_next %}
-            <a href="{% append_to_get page=page_obj.next_page_number %}">Sljedeca</a>
+            <a href="{% append_to_get page=page_obj.next_page_number %}">Sljedeća</a>
             {% endif %}
         </span>
     </div>
