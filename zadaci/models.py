@@ -35,6 +35,19 @@ class Zadatak(models.Model):
         ordering = ('-kvaliteta', '-kvaliteta_br_glasova',
                     '-tezina', '-tezina_br_glasova', '-vrijeme',)
 
+    def br_korisnika(self, tip_liste):
+        """Broj korisnika koji su stavili zadatak
+        na listu TODO, rijesenih ili najdrazih zadataka.
+        """
+        return Aktivnost.objects.filter(zadatak=self,
+                                        tip_aktivnosti=tip_liste).count()
+
+    # Funckije koje sluze da se gornja funkcija moze pozvati iz templatea,
+    # dakle bez parametra.
+    def br_todo(self): return self.br_korisnika('todo')
+    def br_rijesio(self): return self.br_korisnika('rijesio')
+    def br_najdrazi(self): return self.br_korisnika('najdrazi')
+
     def delete(self):
         """Brine da se i obiljezja zadatka obrisu."""
         Tag.objects.update_tags(self, None)

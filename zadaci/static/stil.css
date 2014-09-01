@@ -176,7 +176,6 @@ ul li:before {
 
 .legenda {
     font-style: italic;
-    margin: 1em 0 1em 0;
 }
 
 #zadatak_form {
@@ -184,8 +183,13 @@ ul li:before {
 }
 
 .tablica_zadataka {
+    margin-top: 1em;
     border-collapse: separate;
     border-spacing: 5px 5px;
+}
+
+.tablica_zadataka tr td {
+    text-align: center;
 }
 
 .dolar {

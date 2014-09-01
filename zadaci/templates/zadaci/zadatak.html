@@ -175,7 +175,7 @@
 
     <div class='info'>Korisnici koji su ovaj zadatak stavili:</div>
     <div class='lista'>
-        Na TODO listu:
+        na TODO listu:
         {% if not todo %} -- {% endif %}
         {% for korisnik in todo %}
         <a class='info' href="/profil/{{korisnik.profil.pk}}">{{korisnik}}</a> 
@@ -183,7 +183,7 @@
     </div>
 
     <div class='lista'>
-        Na listu riješenih:
+        na listu riješenih:
         {% if not rijesio %} -- {% endif %}
         {% for korisnik in rijesio %}
         <a class='info' href="/profil/{{korisnik.profil.pk}}">{{korisnik}}</a> 
@@ -191,7 +191,7 @@
     </div>
 
     <div class='lista'>
-        Na listu najdražih:
+        na listu najdražih:
         {% if not najdrazi %} -- {% endif %}
         {% for korisnik in najdrazi %}
         <a class='info' href="/profil/{{korisnik.profil.pk}}">{{korisnik}}</a> 
@@ -217,7 +217,7 @@
         <input type="submit" value="Pošalji" id="id_submit"/>
         </form>
     {% else %}
-        <p>Da biste mogli komentirati zadatak, morate se <a href="/accounts/login/?next={{request.path}}">prijaviti</a>.</p>
+        <p>Da biste mogli komentirati zadatak, morate se <a href="/accounts/login/?next={{request.path}}" class='info'>prijaviti</a>.</p>
     {% endif %}
 
     <h3>Komentari</h3>

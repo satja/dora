@@ -39,8 +39,22 @@ Sortiraj po:
   <option class='order_izbor' value="{{key}}" {% if order_by_field == key %} selected {% endif %}>{{val}}</option>
   {% endfor %}
 </select>
-<div class="legenda">Težina | Kvaliteta | Zadatak</div>
-    <table class="tablica_zadataka">
+
+<table class="tablica_zadataka">
+    <tr class='legenda'>
+        <td/>
+        <td>Težina</td>
+        <td/>
+        <td>Kvaliteta</td>
+        <td/>
+        <td>Zadatak</td>
+        <td/>
+        <td>#TODO</td>
+        <td/>
+        <td>#Riješen</td>
+        <td/>
+        <td>#Najdraži</td>
+    </tr>
     {% for zadatak in zadaci %}
     <tr>
         <td>
@@ -65,26 +79,38 @@ Sortiraj po:
         <td>
             <a href="/zadatak/{{ zadatak.id }}/" class="info">{{ zadatak.ime }}</a></li>
         </td>
+        <td class="pipe">|</td>
+        <td>
+            {{ zadatak.br_todo }}
+        </td>
+        <td class="pipe">|</td>
+        <td>
+            {{ zadatak.br_rijesio }}
+        </td>
+        <td class="pipe">|</td>
+        <td>
+            {{ zadatak.br_najdrazi }}
+        </td>
     </tr>
     {% endfor %}
-    </table>
+</table>
 
-    {# Paginacija #}
-    {% if is_paginated %}
-        <div class="paginacija">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                <a href="{% append_to_get page=page_obj.previous_page_number %}">Prethodna</a>
-                {% endif %}
-                <span class="page-current">
-                    Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}.
-                </span>
-                {% if page_obj.has_next %}
-                <a href="{% append_to_get page=page_obj.next_page_number %}">Sljedeca</a>
-                {% endif %}
+{# Paginacija #}
+{% if is_paginated %}
+    <div class="paginacija">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="{% append_to_get page=page_obj.previous_page_number %}">Prethodna</a>
+            {% endif %}
+            <span class="page-current">
+                Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}.
             </span>
-        </div>
-    {% endif %}
+            {% if page_obj.has_next %}
+            <a href="{% append_to_get page=page_obj.next_page_number %}">Sljedeca</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
 {% else %}
 <p>
     Još nema takvih zadataka. <a href="/dodaj/">Dodaj zadatak</a>
