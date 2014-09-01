@@ -27,7 +27,7 @@ class Zadatak(models.Model):
     vrijeme = models.DateTimeField(default=datetime.datetime.now)
     obiljezja = TagAutocompleteField()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.ime
 
     def get_tags(self):
@@ -58,7 +58,7 @@ class Profil(models.Model):
 
     vrijeme_registracije = models.DateTimeField(default=datetime.datetime.now)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username
 
 
@@ -71,7 +71,7 @@ class Glas(models.Model):
     tip_glasa = models.CharField(max_length=10, choices=TIPOVI_GLASA)
     vrijednost = models.FloatField()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user.username + ' ' + self.zadatak.ime + ' '\
             + self.tip_glasa + ' ' + str(self.vrijednost)
 
@@ -91,7 +91,7 @@ class Aktivnost(models.Model):
     tip_aktivnosti = models.CharField(max_length=11, choices=TIPOVI_AKTIVNOSTI)
     vrijeme = models.DateTimeField(default=datetime.datetime.now)
 
-    def __str__(self):
+    def __unicode__(self):
         prikaz = self.user.username + ' ' + self.get_tip_aktivnosti_display()
         if not self.zadatak:
             return prikaz
