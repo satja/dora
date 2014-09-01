@@ -21,6 +21,9 @@ class Zadatak(models.Model):
     kvaliteta = models.FloatField(null=True, blank=True)
     kvaliteta_br_glasova = models.IntegerField(default=0)
     dodao = models.ForeignKey(User, related_name='dodao')
+    br_todo = models.IntegerField(default=0)
+    br_rijesio = models.IntegerField(default=0)
+    br_najdrazi = models.IntegerField(default=0)
     vrijeme = models.DateTimeField(default=datetime.datetime.now)
     obiljezja = TagAutocompleteField()
 
@@ -34,19 +37,6 @@ class Zadatak(models.Model):
     class Meta:
         ordering = ('-kvaliteta', '-kvaliteta_br_glasova',
                     '-tezina', '-tezina_br_glasova', '-vrijeme',)
-
-    def br_korisnika(self, tip_liste):
-        """Broj korisnika koji su stavili zadatak
-        na listu TODO, rijesenih ili najdrazih zadataka.
-        """
-        return Aktivnost.objects.filter(zadatak=self,
-                                        tip_aktivnosti=tip_liste).count()
-
-    # Funckije koje sluze da se gornja funkcija moze pozvati iz templatea,
-    # dakle bez parametra.
-    def br_todo(self): return self.br_korisnika('todo')
-    def br_rijesio(self): return self.br_korisnika('rijesio')
-    def br_najdrazi(self): return self.br_korisnika('najdrazi')
 
     def delete(self):
         """Brine da se i obiljezja zadatka obrisu."""
