@@ -5,8 +5,6 @@
 {% block title %}Zadatak {{zadatak.ime}}{% endblock title %}
 
 {% block content %}
-<h2>{{ zadatak.ime }}</h2>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <script type="text/javascript">
     // Popuni korisnikove trenutne preferencije za ovaj zadatak.
@@ -14,6 +12,12 @@
         document.getElementById("lista").value = "{{lista}}";
         document.getElementById("tezina").value = "{{tezina}}";
         document.getElementById("kvaliteta").value = "{{kvaliteta}}";
+
+        {% if je_li_najdrazi %}
+        document.getElementById("dugme_najdrazi").innerHTML = "Ukloni";
+        {% else %}
+        document.getElementById("dugme_najdrazi").innerHTML = "Da!";
+        {% endif %}
     }
     // Nakon glasovanja azuriraju se vrijednosti (prosjecan glas i broj glasova).
     function glasuj_callback(data) {
@@ -28,6 +32,14 @@
                 }, {
                 'zadatak_id': {{zadatak.pk}},
                 'lista': lista,
+                });
+    }
+    // Dodaje ili mice zadatak s liste najdrazih zadataka korisnika.
+    function promijeni_najdrazi() {
+        Dajaxice.zadaci.azuriraj_najdrazi(function() {
+                    location.reload();
+                }, {
+                    'zadatak_id': {{zadatak.pk}}
                 });
     }
     // Izvrsava se kada korisnik glasuje za tezinu ili kvalitetu zadatka.
@@ -75,16 +87,32 @@
     window.onload = onPageLoad;
 </script>
 
+<h2>{{ zadatak.ime }}</h2>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if je_li_najdrazi %}
+<div class='info'>
+    <img id='zvjezdica' src="/static/zvjezdica.png">
+    <span class='na_listi_najdrazih'>
+        Na listi najdražih.
+        <button id='dugme_najdrazi' type="button" onclick="promijeni_najdrazi()"></button>
+    </span>
+</div>
+{% endif %}
+
 <div>
     {% if user.is_authenticated %}
     <div class='info'>
-        Tvoja lista na kojoj se zadatak nalazi:
+        Označi zadatak:
         <select id="lista" onchange="promijeni_listu()">
-            <option value="">Nijedna</option>
-            <option value="todo">TODO zadaci</option>
-            <option value="rijesio">Riješeni zadaci</option>
-            <option value="najdrazi">Najdraži zadaci</option>
+            <option value="">--</option>
+            <option value="todo">TODO</option>
+            <option value="rijesio">Riješen</option>
         </select>
+        {% if not je_li_najdrazi %}
+        Jedan od najdražih? 
+        <button id='dugme_najdrazi' type="button" onclick="promijeni_najdrazi()"></button>
+        {% endif %}
     </div>
     {% endif %}
 

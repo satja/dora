@@ -2,6 +2,7 @@ from django.db.models import Avg
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from dajaxice.decorators import dajaxice_register
+from django.shortcuts import get_object_or_404
 from django_comments.models import Comment
 from zadaci.models import Zadatak, Glas, Aktivnost
 
@@ -10,14 +11,14 @@ from zadaci.models import Zadatak, Glas, Aktivnost
 @login_required
 def azuriraj_listu(request, zadatak_id, lista):
     """Azurira na kojoj se listi doticnoga korisnika nalazi doticni zadatak
-    (TODO lista, lista rijesenih, lista najdrazih).
+    (TODO lista, lista rijesenih ili nijedna od njih).
     """
-    zadatak = Zadatak.objects.get(pk=zadatak_id)
+    zadatak = get_object_or_404(Zadatak, pk=zadatak_id)
 
     # Obrisi prijasnju listu.
     Aktivnost.objects.filter(
         user=request.user, zadatak=zadatak,
-        tip_aktivnosti__in=['todo', 'rijesio', 'najdrazi']).delete()
+        tip_aktivnosti__in=['todo', 'rijesio']).delete()
 
     # Zabiljezi novu listu.
     if lista != "":
@@ -30,6 +31,25 @@ def azuriraj_listu(request, zadatak_id, lista):
         zadatak=zadatak, tip_aktivnosti='todo').count()
     zadatak.br_rijesio = Aktivnost.objects.filter(
         zadatak=zadatak, tip_aktivnosti='rijesio').count()
+    zadatak.save()
+
+
+@dajaxice_register
+@login_required
+def azuriraj_najdrazi(request, zadatak_id):
+    """Dodaje ili mice zadatak s liste najdrazih zadataka doticnoga korisnika.
+    """
+    zadatak = get_object_or_404(Zadatak, pk=zadatak_id)
+    najdrazi = Aktivnost.objects.filter(user=request.user, zadatak=zadatak,
+                                        tip_aktivnosti='najdrazi')
+    if najdrazi:
+        najdrazi.delete()
+    else:
+        aktivnost = Aktivnost(user=request.user, zadatak=zadatak,
+                              tip_aktivnosti='najdrazi')
+        aktivnost.save()
+
+    # Azuriraj zadatak.
     zadatak.br_najdrazi = Aktivnost.objects.filter(
         zadatak=zadatak, tip_aktivnosti='najdrazi').count()
     zadatak.save()

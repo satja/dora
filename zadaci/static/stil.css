@@ -324,6 +324,10 @@ li a {
     float: right;
 }
 
+.na_listi_najdrazih {
+    vertical-align: 5px;
+}
+
 .lista {
     margin: 1em;
 }

@@ -38,13 +38,18 @@ class zadatak(generic.DetailView):
         korisnik = self.request.user
         if korisnik.is_authenticated():
             # Je li korisnik stavio ovaj zadatak na listu
-            # todo, rijeseni, najdrazi?
+            # todo ili rijesenih zadataka?
             lista = Aktivnost.objects.filter(
                 user=korisnik, zadatak=ovaj_zadatak,
-                tip_aktivnosti__in=['todo', 'rijesio', 'najdrazi']
+                tip_aktivnosti__in=['todo', 'rijesio']
             ).values_list('tip_aktivnosti', flat=True)
             if lista:
                 context['lista'] = lista[0]
+
+            # A je li mu ovo jedan od najdrazih zadataka?
+            context['je_li_najdrazi'] = Aktivnost.objects.filter(
+                user=korisnik, zadatak=ovaj_zadatak, tip_aktivnosti='najdrazi'
+            ).count()
 
             # Je li korisnik glasao za tezinu/kvalitetu?
             for tip_glasa in ['tezina', 'kvaliteta']:
