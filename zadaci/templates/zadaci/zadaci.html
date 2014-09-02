@@ -49,11 +49,11 @@ Sortiraj po:
         <td/>
         <td>Zadatak</td>
         <td/>
-        <td>#Najdraži</td>
-        <td/>
         <td>#Riješen</td>
         <td/>
         <td>#TODO</td>
+        <td/>
+        <td>#Najdraži</td>
     </tr>
     {% for zadatak in zadaci %}
     <tr>
@@ -81,15 +81,15 @@ Sortiraj po:
         </td>
         <td class="pipe">|</td>
         <td>
-            {{ zadatak.br_najdrazi }}
-        </td>
-        <td class="pipe">|</td>
-        <td>
             {{ zadatak.br_rijesio }}
         </td>
         <td class="pipe">|</td>
         <td>
             {{ zadatak.br_todo }}
+        </td>
+        <td class="pipe">|</td>
+        <td>
+            {{ zadatak.br_najdrazi }}
         </td>
     </tr>
     {% endfor %}
@@ -111,6 +111,7 @@ Sortiraj po:
         </span>
     </div>
 {% endif %}
+
 {% else %}
 <p>
     Još nema takvih zadataka. <a href="/dodaj/">Dodaj zadatak</a>
