@@ -49,11 +49,11 @@ Sortiraj po:
         <td/>
         <td>Zadatak</td>
         <td/>
-        <td>#TODO</td>
+        <td>#Najdraži</td>
         <td/>
         <td>#Riješen</td>
         <td/>
-        <td>#Najdraži</td>
+        <td>#TODO</td>
     </tr>
     {% for zadatak in zadaci %}
     <tr>
@@ -81,7 +81,7 @@ Sortiraj po:
         </td>
         <td class="pipe">|</td>
         <td>
-            {{ zadatak.br_todo }}
+            {{ zadatak.br_najdrazi }}
         </td>
         <td class="pipe">|</td>
         <td>
@@ -89,7 +89,7 @@ Sortiraj po:
         </td>
         <td class="pipe">|</td>
         <td>
-            {{ zadatak.br_najdrazi }}
+            {{ zadatak.br_todo }}
         </td>
     </tr>
     {% endfor %}
