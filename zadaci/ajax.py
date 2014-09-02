@@ -62,17 +62,13 @@ def glasuj(request, zadatak_id, tip_glasa, glas):
     """
     zadatak = Zadatak.objects.get(pk=zadatak_id)
 
-    # Je li korisnik vec glasao za ovo?
-    postojeci_glas = Glas.objects.filter(user=request.user, zadatak=zadatak,
-                                         tip_glasa=tip_glasa)
-    if postojeci_glas.count() == 0:
-        novi_glas = Glas(user=request.user, zadatak=zadatak,
-                         tip_glasa=tip_glasa, vrijednost=glas)
-    else:
-        novi_glas = postojeci_glas[0]
-        novi_glas.vrijednost = glas
-
-    novi_glas.save()
+    # Obrisi prijasnji glas istoga korisnika.
+    Glas.objects.filter(user=request.user, zadatak=zadatak,
+                        tip_glasa=tip_glasa).delete()
+    # Dodaj novi glas.
+    glas = Glas(user=request.user, zadatak=zadatak, tip_glasa=tip_glasa,
+                vrijednost=glas)
+    glas.save()
 
     # Racunamo novi prosjecan glas za doticni zadatak.
     vrijednost = Glas.objects.filter(
@@ -90,7 +86,6 @@ def glasuj(request, zadatak_id, tip_glasa, glas):
         zadatak.kvaliteta_br_glasova = br_glasova
     else:
         raise Exception("Tip glasa mora biti 'tezina' ili 'kvaliteta'!")
-
     zadatak.save()
 
     return simplejson.dumps({'tip_glasa': tip_glasa,
