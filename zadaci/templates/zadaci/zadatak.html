@@ -21,7 +21,7 @@
     }
     // Nakon glasovanja azuriraju se vrijednosti (prosjecan glas i broj glasova).
     function glasuj_callback(data) {
-        document.getElementById(data.tip_glasa + "_ukupno").innerHTML = data.vrijednost;
+        document.getElementById(data.tip_glasa + "_ukupno").innerHTML = Math.round(data.vrijednost * 10) / 10;
         document.getElementById(data.tip_glasa + "_br_glasova").innerHTML = data.br_glasova;
     }
     // Azurira na kojoj se korisnikovoj listi zadatak nalazi.
@@ -123,7 +123,7 @@
             <td class="info">Težina:</span></td>
             <td>
                 <span id='tezina_ukupno'>
-                    {% if zadatak.tezina %} {{zadatak.tezina}} {% else %} N/A {% endif %}
+                    {% if zadatak.tezina %} {{zadatak.tezina|floatformat}} {% else %} N/A {% endif %}
                 </span>
                 (glasova: <span id='tezina_br_glasova'>{{zadatak.tezina_br_glasova}}</span>)
             </td>
@@ -150,7 +150,7 @@
             <td class="info">Kvaliteta:</td>
             <td>
                 <span id='kvaliteta_ukupno'>
-                    {% if zadatak.kvaliteta %} {{zadatak.kvaliteta}} {% else %} N/A {% endif %}
+                    {% if zadatak.kvaliteta %} {{zadatak.kvaliteta|floatformat}} {% else %} N/A {% endif %}
                 </span>
                 (glasova: <span id='kvaliteta_br_glasova'>{{zadatak.kvaliteta_br_glasova}}</span>)
             </td>

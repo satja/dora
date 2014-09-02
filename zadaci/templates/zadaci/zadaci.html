@@ -62,7 +62,7 @@ Sortiraj po:
         </td>
         <td>
                 {% if zadatak.tezina %}
-                    {{zadatak.tezina}}
+                    {{zadatak.tezina|floatformat}}
                 {% else %}
                     N/A
                 {% endif %}
@@ -70,7 +70,7 @@ Sortiraj po:
         <td class="pipe">|</td>
         <td>
                 {% if zadatak.kvaliteta %}
-                    {{zadatak.kvaliteta}}
+                    {{zadatak.kvaliteta|floatformat}}
                 {% else %}
                     N/A
                 {% endif %}
