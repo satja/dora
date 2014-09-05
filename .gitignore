@@ -6,7 +6,7 @@ local/
 /static/
 
 *.ropeproject/*
-zadaci/.ropeproject/
+.ropeproject/
 *.pyc
 *.bak
 *~
