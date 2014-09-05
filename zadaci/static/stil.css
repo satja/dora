@@ -359,6 +359,7 @@ li a {
     font-weight: bold;
 }
 
-#dodaj_dugme {
+.dodaj_dugme {
     margin-left: 2px;
+    display: inline;
 }

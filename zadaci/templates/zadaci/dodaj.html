@@ -1,18 +1,11 @@
 {% extends "base.html" %}
+{% load replace %}
 
 {% block title %}Dodaj/uredi zadatak{% endblock title %}
 
 {% block content %}
-{% if uspjeh == 'izmijenio' %}
-<div class='info dodan'>
-    Zadatak <a href='/zadatak/{{zadatak.pk}}'>{{zadatak.ime}}</a> uspješno je izmijenjen!
-</div>
-{% endif %}
-{% if uspjeh == 'dodao' %}
-<div class='info dodan'>
-    Zadatak <a href='/zadatak/{{zadatak.pk}}'>{{zadatak.ime}}</a> uspješno je dodan!
-</div>
-{% endif %}
+
+<div class='siroki_div'>
 
 {% if not izmjena %}
 <h2>Dodaj zadatak</h2>
@@ -52,7 +45,8 @@ Najprije <a href="/">provjeri</a> je li zadatak već u arhivi.
             <td>
             </td>
             <td>
-                <input id='dodaj_dugme' class='sire_dugme' type="submit" name="submit" {% if not izmjena %} value='Dodaj' {% else %} value="Izmijeni {% endif %}"/>
+                <input class='dodaj_dugme' type="submit" name="submit" value='Spremi'/>
+                <input class='dodaj_dugme' type="submit" name="submit" value='Spremi i dodaj novi'/>
             </td>
         </tr>
     </table>
@@ -75,7 +69,7 @@ Najprije <a href="/">provjeri</a> je li zadatak već u arhivi.
         </li>
         <li><span class='info'>Obilježja.</span></li>
 
-        <li>Prilikom dodavanja obilježja koristite zdrav razum. Načelno je pravilo da je obilježje je prikladno za zadatak ako zadovoljava
+        <li>Prilikom dodavanja obilježja koristite zdrav razum. Načelno je pravilo da je obilježje prikladno za zadatak ako zadovoljava
         <i>barem jedan</i> od sljedećih uvjeta:
         <ul class='uvuci'>
             <li>zadatak je prikladan za korisnika koji pretražuje po tom obilježju,</li>
@@ -93,6 +87,24 @@ Najprije <a href="/">provjeri</a> je li zadatak već u arhivi.
         <li>Dobro je dodati i općenita i određenija obiljezja.
         Na primjer, uz <i>vezana-lista</i> valja dodati <i>strukture-podataka</i>,
         a uz <i>floyd-warshall</i> valja dodati <i>grafovi</i>.</li>
+    </ul>
+</div>
+
+</div>
+
+<div class='nedavno'>
+    <h3>Nedavne aktivnosti</h3>
+    <ul>
+        {% for aktivnost in nedavno %}
+        <li><a class='info' href='/profil/{{aktivnost.user.profil.pk}}'>{{aktivnost.user.username}}</a>
+        {% if aktivnost.user.profil.spol == "f" %}
+        {{aktivnost.get_tip_aktivnosti_display|replace:"/ao/ala/g"|replace:"/io/ila/g"}}
+        {% else %}
+        {{aktivnost.get_tip_aktivnosti_display}}
+        {% endif %}
+        <a class='info' href='/zadatak/{{aktivnost.zadatak.pk}}'>{{aktivnost.zadatak.ime}}</a>
+        </li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock content %}

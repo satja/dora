@@ -203,12 +203,10 @@ def dodaj_zadatak(request, zadatak_id=None):
                                   tip_aktivnosti=tip_aktivnosti)
             aktivnost.save()
 
-            # Javi uspjeh i renderiraj formu za dodavanje novog zadatka.
-            return render(request, 'zadaci/dodaj.html', {
-                'form': ZadatakForm(),
-                'zadatak': zadatak,
-                'uspjeh': tip_aktivnosti,
-            })
+            # Je li korisnik stisnuo "Spremi" ili "Spremi i dodaj novi"?
+            if request.POST.get('submit') == 'Spremi':
+                return redirect('/zadatak/' + str(zadatak.pk))
+            return redirect('/dodaj/')
         else:
             print form.errors
 
@@ -220,8 +218,10 @@ def dodaj_zadatak(request, zadatak_id=None):
         else:
             form = ZadatakForm()
 
-    return render(request, 'zadaci/dodaj.html', {'form': form,
-                                                 'izmjena': izmjena})
+    return render(request, 'zadaci/dodaj.html', {
+        'form': form,
+        'nedavno': Aktivnost.objects.all().order_by('-vrijeme')[:15],
+        'izmjena': izmjena})
 
 
 @login_required
