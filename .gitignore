@@ -3,7 +3,7 @@ dora/settings/local.py
 backup
 media/
 local/
-static/
+/static/
 
 *.ropeproject/*
 zadaci/.ropeproject/
