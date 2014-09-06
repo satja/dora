@@ -45,7 +45,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'dora.urls'
+ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'dora.wsgi.application'
 
