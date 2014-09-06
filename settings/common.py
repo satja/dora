@@ -47,7 +47,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'dora.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 LOGIN_URL = '/accounts/register'
 
