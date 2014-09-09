@@ -256,7 +256,7 @@
         {% for komentar in komentari reversed %}
             <a class='info' href='/profil/{{komentar.user.profil.pk}}'>{{komentar.user_name}}</a>
             {{komentar.submit_date}}
-            {% if user.is_staff or user == komentar.user %} 
+            {% if user.is_staff %} 
                 <a href="javascript:obrisi_komentar({{komentar.pk}})">Obriši komentar</a>
             {% endif %}
             <div class='komentar'>{{komentar.comment}}</div>

@@ -98,6 +98,6 @@ def glasuj(request, zadatak_id, tip_glasa, glas):
 def obrisi_komentar(request, komentar_id):
     """Brise komentar na zadatak."""
     komentar = Comment.objects.get(pk=komentar_id)
-    if komentar.user == request.user or request.user.is_staff:
+    if request.user.is_staff:
         komentar.is_removed = True
         komentar.save()
