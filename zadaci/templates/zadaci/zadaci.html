@@ -31,7 +31,8 @@ Sortiraj po:
     function promijeni_poredak(){
         var select = document.getElementById("order_izbor");
         var novi_poredak = select.options[select.selectedIndex].value;
-        window.location = replaceUrlParam(document.URL, 'by', novi_poredak);
+        var novi_url = replaceUrlParam(document.URL, 'by', novi_poredak);
+        window.location = replaceUrlParam(novi_url, 'page', '1');
     }
 </script>
 <select id='order_izbor' onchange="promijeni_poredak()">
