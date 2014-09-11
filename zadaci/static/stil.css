@@ -8,10 +8,18 @@ body {
     font-size: 9.5pt;
 }
 
+#sve {
+    margin-left: auto;
+    margin-right: auto;
+    width: 104em;
+}
+
 .header {
     border: 1px solid;
     border-color: #99FF00;
     padding: 1em;
+    width: 104em;
+    position: relative;
 }
 
 .naslov {
@@ -22,8 +30,8 @@ body {
 
 .coded_by {
     position: absolute;
-    top: 2.5em;
-    right: 3em;
+    top: 1.8em;
+    right: 1.1em;
     font-size: 8pt;
 }
 
@@ -36,7 +44,7 @@ body {
 .izbornik {
     width: 15em;
     float: left;
-    padding: 1em;
+    padding-top: 1em;
 }
 
 .siroki_div {
