@@ -1,7 +1,7 @@
 {% load i18n %}
-Nova poruka na temi http://{{ site.domain }}{{ thread.get_absolute.url }} -- {{ author }} je napisao/la:
+Nova poruka na temi http://{{ site.domain }}{{ thread.get_absolute_url }} -- {{ author }} je napisao/la:
 
 {{ body }}
 
 --
-Ovu poruku primaš jer si pretplaćen/a na forumsku temu na Dori. Svoje pretplate možeš ažurirati na http://dora.hsin.hr/forum/subscriptions/
+Ovu poruku primaš jer si pretplaćen/a na forumsku temu na Dori. Svoje pretplate možeš ažurirati na http://{{site.domain}}forum/subscriptions/
