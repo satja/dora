@@ -1,7 +1,9 @@
 {% load i18n %}
+Nova poruka na temi http://{{ domain }}{{ url }} :
+
+{{ author }}:
+
 {{ body }}
 
 --
-{% blocktrans with site.name as site_name and site.domain as domain and thread.get_absolute_url as url %}
-Ovu poruku primaš jer si pretplaćen/a na forumsku temu na Dori. Svoje pretplate možeš ažurirati na http://{{ domain }}{{ url }}
-{% endblocktrans %}
+Ovu poruku primaš jer si pretplaćen/a na forumsku temu na Dori. Svoje pretplate možeš ažurirati na http://dora.hsin.hr/forum/subscriptions/
