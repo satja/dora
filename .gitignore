@@ -4,6 +4,7 @@ backup
 media/
 local/
 /static/
+forum/.svn
 
 *.ropeproject/*
 .ropeproject/
@@ -11,5 +12,6 @@ local/
 *.bak
 *~
 *.swp
+*.svn-base
 
 Thumbs.db

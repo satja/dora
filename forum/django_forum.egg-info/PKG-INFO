@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: django-forum
+Version: r53
+Summary: django-forum
+Home-page: http://code.google.com/p/django-forum/
+Author: Ross Poulton
+Author-email: ross@rossp.org
+License: BSD
+Description: 
+        ============
+        Django Forum
+        ============
+        
+        This is a very basic forum application that can plug into any
+        existing Django installation and use it's existing templates,
+        users, and admin interface.
+        
+Keywords: forum,django
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Framework :: Django
+Classifier: Environment :: Web Environment
