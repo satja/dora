@@ -158,7 +158,7 @@ def reply(request, thread):
                 c = Context({
                     'body': wordwrap(striptags(body), 72),
                     'site' : Site.objects.get_current(),
-                    'thread': t,
+                    'post': p,
                     'author': request.user,
                     })
 
