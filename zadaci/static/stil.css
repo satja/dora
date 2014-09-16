@@ -344,7 +344,9 @@ li a {
 }
 
 .errors {
+    text-decoration: none;
     color: red;
+    font-weight: normal;
 }
 
 .errors ul li {
@@ -369,4 +371,114 @@ li a {
 .dodaj_dugme {
     margin-left: 2px;
     display: inline;
+}
+
+
+#djangoForumBody {
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#djangoForumList,
+#djangoForumThreadList,
+#djangoForumThreadPosts {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#djangoForumThreadPosts {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#djangoForumList td,
+#djangoForumThreadList td,
+#djangoForumThreadPosts td {
+    border: solid #777 1px;
+    padding: 6px;
+}
+
+#djangoForumList .djangoForumListDetails {
+}
+
+#djangoForumList .djangoForumListDetails strong {
+    font-size: 120%;
+}
+
+#djangoForumList .djangoForumListDetails .djangoForumStats {
+    font-size: 80%;
+}
+
+.djangoForumListLastPost,
+.djangoForumThreadLastPost {
+    border-bottom: solid #777 1px;
+}
+
+#djangoForumList th,
+#djangoForumThreadList th,
+#djangoForumThreadPosts th {
+    border: solid #777 1px;
+    color: #fff;
+    text-align: left;
+    padding: 4px;
+}
+
+#djangoForumThreadPosts th {
+    width: 23%;
+}
+
+#djangoForumBreadcrumbs {
+    padding: 20px;
+}
+
+#djangoForumBody label {
+    font-size: 110%;
+    font-weight: bold;
+    display: block;
+    padding: 4px;
+}
+
+#djangoForumThreadPostDetail {
+    width: 20%;
+}
+.djangoForumPagination {
+    display: inline;
+}
+
+.forum_poruka_pogleda {
+    width: 70px;
+}
+.forum_najnovija {
+    width: 400px;
+}
+
+.forum_poruka_label {
+    margin-top: 5px;
+    padding: 2px;
+}
+
+.forum_poruka_vrijeme {
+    font-style: italic;
+    font-weight: normal;
+}
+
+#id_title {
+    background: transparent;
+    color: white;
+}
+#id_body {
+    background: transparent;
+}
+
+.podforum {
+    margin-bottom: 2em;
+}
+
+.natrag {
+    margin-top: 30px;
+}
+
+.forum_stranice {
+    text-align: center; 
 }

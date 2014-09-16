@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with forum.title as title %}Nova tema u {{ title }}{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+<h2>Otvori temu</h2>
+<p class='podforum'>Podforum: <a class='info' href='{{forum.get_absolute_url}}'>{{forum.title}}</a></p>
+<form method='post' action='./'>
+{% csrf_token %}
+<div class='forum_poruka_label'>
+    {{ form.visible_fields.0.label }}
+    {% if form.visible_fields.0.errors %}
+    <span class='errors'>[{{ form.visible_fields.0.errors.0 }}]</span>
+    {% endif %}
+</div>
+{{ form.visible_fields.0 }}
+<div class='forum_poruka_label'>
+    {{ form.visible_fields.1.label }}
+    {% if form.visible_fields.1.errors %}
+    <span class='errors'>[{{ form.visible_fields.1.errors.0 }}]</span>
+    {% endif %}
+</div>
+<div>{{ form.visible_fields.1 }}</div>
+{{ form.visible_fields.2.label }}
+{{ form.visible_fields.2 }}
+<p><input class='sire_dugme' type='submit' value='Pošalji'/></p>
+</form>
+
+{% endblock %}

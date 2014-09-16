@@ -1,0 +1,33 @@
+{% extends "base.html" %}{% load i18n %}
+
+{% block title %}Dorin forum{% endblock %}
+
+{% block content %}
+<table id='djangoForumList'>
+<tr>
+<th>Forum</th>
+<th class='forum_najnovija'>Posljednja poruka</th>
+</tr>
+
+{% for forum in object_list %}
+<tr>
+<td class='djangoForumListDetails'><p><strong><a href='{{ forum.get_absolute_url }}' class='info'>{{ forum.title }}</a></strong><br /><span class='djangoForumStats'>{% blocktrans with forum.threads as thread_count and forum.posts as post_count %}{{ thread_count }} tema, {{ post_count }} poruka{% endblocktrans %}</span></p>
+<p>{{ forum.description }}</p></td>
+{% with forum.forum_latest_post as latest_post %}
+<td class='djangoForumListLastPost'>
+    {% if latest_post %}
+    [{{ latest_post.author }}]
+    {{ latest_post.time }}
+    <a class='info' href='{{ latest_post.get_absolute_url }}'>[baci oko]</a>
+    {% else %}
+    Nema poruka.
+    {% endif %}
+</td>
+{% endwith %}
+</tr>
+{% endfor %}
+</table>
+{% if request.user.is_authenticated %}
+<p><a class='info' href="{% url "forum_subscriptions" %}">Ažuriraj svoje pretplate</a></p>
+{% endif %}
+{% endblock %}

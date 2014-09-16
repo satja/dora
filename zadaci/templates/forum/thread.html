@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ thread.title|escape }} [{{ forum.title }}]{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript">
+    function obrisi_poruku(post_id) {
+        Dajaxice.zadaci.obrisi_forumsku_poruku(function() {
+                    location.reload();
+                }, {
+                'post_id': post_id,
+                });
+    }
+</script>
+<h2>{{thread.title}}</h2>
+<p>Podforum: <a class='info' href='{{thread.forum.get_absolute_url}}'>{{thread.forum.title}}</a></p>
+
+{% if is_paginated %}
+    <div class="forum_stranice">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">Prethodna</a>
+            {% endif %}
+            <span class="page-current">
+                Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Sljedeća</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+<table id='djangoForumThreadPosts'>
+{% for post in post_list %}
+<tr>
+    <th class='djangoForumThreadPostDetail' id='post{{ post.id }}'>
+        <a class='info' href='/profil/{{post.author.profil.pk}}'>[{{ post.author }}]</a>
+        <div class='forum_poruka_vrijeme'>{{ post.time }}</div>
+        {% if user.is_staff %} 
+            <a class='errors' href="javascript:obrisi_poruku({{post.id}})">Obriši komentar</a>
+        {% endif %}
+    </th>
+<td>{{ post.body_html|safe }}</td>
+</tr>{% endfor %}
+</table>
+
+{% if is_paginated %}
+    <div class="forum_stranice">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">Prethodna</a>
+            {% endif %}
+            <span class="page-current">
+                Stranica {{ page_obj.number }} od {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Sljedeća</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+{% if thread.closed %}
+<p>Tema je zatvorena.</p>
+{% else %}
+
+<h3>Tvoj odgovor:</h3>
+{% if user.is_authenticated %}
+<form method='post' action='reply/'>
+{% csrf_token %}
+<div>{{ form.visible_fields.0 }}</div>
+{{ form.visible_fields.1.label }}
+{{ form.visible_fields.1 }}
+<p><input type='submit' class='sire_dugme' value='Pošalji'/></p>
+</form>
+{% else %}
+<p>Najprije se <a href='/registracija/'>prijavi</a>.</p>
+{% endif %}
+
+{% endif %}
+
+{% endblock %}

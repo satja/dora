@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'ordered_listview',
     'dajaxice',
     'tagging_autocomplete',
+    'forum',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,7 @@ WSGI_APPLICATION = 'wsgi.application'
 
 LOGIN_URL = '/accounts/register'
 
+FORUM_BASE = '/forum'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

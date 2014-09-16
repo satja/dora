@@ -15,6 +15,7 @@ urlpatterns = patterns(
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^forum/', include('forum.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()

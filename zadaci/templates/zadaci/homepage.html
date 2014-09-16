@@ -71,8 +71,8 @@
             </table>
         </form>
     </div>
-    {% if not user.is_authenticated %}
     <div class='sto_je_dora'>
+        {% if not user.is_authenticated %}
         <h2>Što je Dora?</h2>
         Dora je edukativna stranica koja služi kao pomoć
         osnovnoškolcima, srednjoškolcima i studentima pri učenju algoritama i
@@ -82,8 +82,13 @@
         do najsloženijih tema. Korisnike će dodatno motivirati
         označavanje zadataka koje su riješili, kao i označavanje
         najdražih te TODO zadataka.
+        {% else %}
+        <h3>Novosti</h3>
+        <ul>
+            <li>Dodan je <a class='info' href='/forum/'>Forum</a>.</li>
+        </ul>
+        {% endif %}
     </div>
-    {% endif %}
     <div class="osnovna_obiljezja">
     <h2>Pretraži po obilježju</h2>
         <div class='stupac'>

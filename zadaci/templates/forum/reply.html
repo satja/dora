@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with thread.title as title %}Odgovori na temu  [{{ title }}]{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+<h3>Odgovori na temu</h3>
+<p class='podforum'>Tema: <a class='info' href='{{thread.get_absolute_url}}'>{{thread.title}}</a></p>
+<form method='post' action='./'>
+{% csrf_token %}
+{{ form.visible_fields.0.errors }}
+<div>{{ form.visible_fields.0 }}</div>
+{{ form.visible_fields.1.label }}
+{{ form.visible_fields.1 }}
+<p><input class='sire_dugme' type='submit' value='Pošalji'/></p>
+</form>
+
+{% endblock %}

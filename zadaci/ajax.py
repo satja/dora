@@ -5,6 +5,7 @@ from dajaxice.decorators import dajaxice_register
 from django.shortcuts import get_object_or_404
 from django_comments.models import Comment
 from zadaci.models import Zadatak, Glas, Aktivnost
+from forum.models import Post
 
 
 @dajaxice_register
@@ -101,3 +102,12 @@ def obrisi_komentar(request, komentar_id):
     if request.user.is_staff:
         komentar.is_removed = True
         komentar.save()
+
+
+@dajaxice_register
+@login_required
+def obrisi_forumsku_poruku(request, post_id):
+    """Brise forumsku poruku."""
+    post = Post.objects.get(pk=post_id)
+    if request.user.is_staff:
+        post.delete()

@@ -44,7 +44,7 @@
         </div>
         <div class="izbornik">
             <ul class="navig">
-                <li class="na_pocetnu"><a href="/">Pretraga</a></li>
+                <li class="na_pocetnu"><a href="/">Početna</a></li>
                 <li><a href="/dodaj/">Dodaj zadatak</a></li>
                 <li><a href="/zadaci/">Svi zadaci</a></li>
                 <li><a href="/random/">Slučajan zadatak</a></li>
@@ -57,6 +57,8 @@
                     <span class="korisnicko_ime">[{{ user.username }}]</span>
                 </a></li>
                 <li><a href="/odjava/">Odjava</a></li>
+                <br/>
+                <li><a href="/forum/">Forum</a></li>
                 {% else %}
                 <li><a href="/accounts/register/">Registriraj se!</a></li>
                 {% endif %}
