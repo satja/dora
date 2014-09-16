@@ -159,6 +159,7 @@ def reply(request, thread):
                     'body': wordwrap(striptags(body), 72),
                     'site' : Site.objects.get_current(),
                     'thread': t,
+                    'author': request.user,
                     })
 
                 email = EmailMessage(
