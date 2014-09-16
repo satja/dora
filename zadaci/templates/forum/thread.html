@@ -39,7 +39,7 @@
         <a class='info' href='/profil/{{post.author.profil.pk}}'>[{{ post.author }}]</a>
         <div class='forum_poruka_vrijeme'>{{ post.time }}</div>
         {% if user.is_staff %} 
-            <a class='errors' href="javascript:obrisi_poruku({{post.id}})">Obriši komentar</a>
+            <a class='errors' href="javascript:obrisi_poruku({{post.id}})">Obriši poruku</a>
         {% endif %}
     </th>
 <td>{{ post.body_html|safe }}</td>

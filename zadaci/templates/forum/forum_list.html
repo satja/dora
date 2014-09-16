@@ -18,7 +18,7 @@
     {% if latest_post %}
     [{{ latest_post.author }}]
     {{ latest_post.time }}
-    <a class='info' href='{{ latest_post.get_absolute_url }}'>[baci oko]</a>
+    <a class='info' href='{{ latest_post.get_absolute_url }}'>[{{latest_post.thread}}]</a>
     {% else %}
     Nema poruka.
     {% endif %}

@@ -7,4 +7,5 @@ pip install django-contrib-comments
 pip install django-registration
 pip install django-tagging
 pip install django-tagging-autocomplete
-
+pip install markdown
+easy_install -U django_evolution
