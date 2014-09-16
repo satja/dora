@@ -6,4 +6,4 @@ Dorin forum te obavještava o novoj poruci -- {{ author }} je napisao/la:
 --
 Link na temu i poruku: http://{{ site.domain }}{{ post.get_absolute_url }}.
 
-Ovu poruku primaš jer si pretplaćen/a na forumsku temu na Dori. Svoje pretplate možeš ažurirati na http://{{site.domain}}forum/subscriptions/
+Ovu poruku primaš jer si pretplaćen/a na forumsku temu na Dori. Svoje pretplate možeš ažurirati na http://{{site.domain}}/forum/subscriptions/
