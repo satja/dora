@@ -484,3 +484,7 @@ li a {
 .forum_stranice {
     text-align: center; 
 }
+
+.zadnja_tema {
+    margin-top: 3px;
+}
