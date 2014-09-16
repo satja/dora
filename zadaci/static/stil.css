@@ -468,6 +468,7 @@ li a {
 #id_title {
     background: transparent;
     color: white;
+    width: 30em;
 }
 #id_body {
     background: transparent;
