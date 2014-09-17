@@ -4,7 +4,9 @@ backup
 media/
 local/
 /static/
+
 forum/.svn
+forum/dist/django_forum-r53-py2.7.egg
 
 *.ropeproject/*
 .ropeproject/
