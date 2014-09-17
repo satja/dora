@@ -6,6 +6,7 @@ local/
 /static/
 
 forum/.svn
+forum/build/
 forum/dist/django_forum-r53-py2.7.egg
 
 *.ropeproject/*
