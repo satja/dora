@@ -543,11 +543,6 @@ li a {
   padding: .5em 1em;
 }
 
-.markup-container pre.remarkup-counterexample {
-  border: 1px solid #aa0000;
-  background-color: #ffaaaa;
-}
-
 .markup-container tt {
   background: black;
   padding: 0 .25em;
