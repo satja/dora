@@ -1,0 +1,3 @@
+[submodule "external/hwop"]
+	path = external/hwop
+	url = https://github.com/agrbin/hwop/
