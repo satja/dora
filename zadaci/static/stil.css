@@ -8,6 +8,10 @@ body {
     font-size: 9.5pt;
 }
 
+svg {
+    -webkit-filter: invert(100%);
+}
+
 #sve {
     margin-left: auto;
     margin-right: auto;
@@ -489,4 +493,327 @@ li a {
 
 .zadnja_tema {
     margin-top: 3px;
+}
+
+/**
+ * @provides remarkup
+ */
+
+.markup-container {
+  line-height: 1.45em;
+}
+
+.markup-container p {
+  margin: 0 0 1em;
+}
+
+.markup-container p:last-child {
+  margin-bottom: 0;
+}
+
+.markup-container .remarkup-code-block {
+  margin: 1em 2em;
+  white-space: pre;
+  font-size: 10px;
+}
+
+.markup-container .remarkup-code-header {
+  padding: .25em 1em;
+  background: #edead7;
+  color: #444444;
+}
+
+.markup-container .remarkup-code-block pre {
+  background: black;
+  display: block;
+  color: #000000;
+  overflow: auto;
+  padding: .5em 1em;
+}
+
+.markup-container pre.remarkup-counterexample {
+  border: 1px solid #aa0000;
+  background-color: #ffaaaa;
+}
+
+.markup-container tt {
+  color: #333333;
+  background: #f4f4ff;
+  padding: 0 .25em;
+  white-space: pre-wrap;
+}
+
+/* NOTE: You can currently produce this with [[link | `name`]]. Restore the
+   link color. */
+.markup-container a tt {
+  color: #18559d;
+}
+
+.markup-container ul {
+  list-style: disc;
+  margin: 1em 0 1em 3em;
+}
+
+.markup-container ol {
+  list-style: decimal;
+  margin: 1em 0 1em 3em;
+}
+
+.markup-container ul ol,
+.markup-container ul ul,
+.markup-container ol ol,
+.markup-container ol ul {
+  margin: .25em 0 .25em 2em;
+}
+
+.markup-container li.phantom-item,
+.markup-container li.phantom-item {
+  list-style-type: none;
+}
+
+.markup-container h1:first-child,
+.markup-container h2:first-child,
+.markup-container h3:first-child,
+.markup-container h4:first-child,
+.markup-container h5:first-child,
+.markup-container h6:first-child {
+  margin-top: 0;
+}
+
+.markup-container h1:last-child,
+.markup-container h2:last-child,
+.markup-container h3:last-child,
+.markup-container h4:last-child,
+.markup-container h5:last-child,
+.markup-container h6:last-child {
+  margin-bottom: 0;
+}
+
+.markup-container h1 {
+  font-size: 1.625em;
+  line-height: 1.625em;
+  margin: .8em 0;
+}
+
+.markup-container h2 {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin: .75em 0;
+}
+
+.markup-container h3 {
+  font-size: 1.375em;
+  line-height: 1.375em;
+  margin: .69em 0;
+}
+
+.markup-container h4 {
+  font-size: 1.25em;
+  line-height: 1.25em;
+  margin: .63em 0;
+}
+
+.markup-container h5 {
+  font-size: 1.125em;
+  line-height: 1.125em;
+  margin: .56em 0;
+}
+
+.markup-container h6 {
+  font-size: 1em;
+  line-height: 1em;
+  margin: .5em 0;
+}
+
+.markup-container blockquote {
+  border-left: 1px solid #AAAAAA;
+  color:       #333333;
+  font-style:  italic;
+  margin:      .5em 0em;
+  padding:     .25em 1em;
+}
+
+.markup-container img.remarkup-proxy-image {
+  max-width: 640px;
+  max-height: 640px;
+}
+
+.markup-container-mention-exists {
+  font-weight: bold;
+  background: #e6f3ff;
+}
+
+.markup-container-mention-disabled {
+  font-weight: bold;
+  background: #dddddd;
+}
+
+.aphront-panel-preview .markup-container-mention-unknown {
+  font-weight: bold;
+  background: #ffaaaa;
+}
+
+.markup-container .remarkup-note {
+  margin: 1em 1.5em;
+  padding: 0.5em 1em;
+  border: 1px solid #ddddff;
+  background: #f3f3ff;
+}
+
+.markup-container-toc {
+  float: right;
+  border: 1px solid #999999;
+  background: #f9f9f9;
+  padding: 4px 12px;
+  width: 220px;
+}
+
+.markup-container-toc-header {
+  font-size: 11px;
+  color: #444444;
+  border-bottom: 1px solid #bbbbbb;
+  margin-bottom: 4px;
+}
+
+.markup-container-toc ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 0.25em;
+}
+
+.markup-container-toc ul ul {
+  margin-left: 1.25em;
+}
+
+.markup-container-toc ul li {
+  padding: 0;
+  margin: 0;
+}
+
+.markup-container-embed-layout-right {
+  text-align: right;
+}
+
+.markup-container-embed-layout-center {
+  text-align: center;
+}
+
+.markup-container-embed-layout-inline {
+  display: inline;
+}
+
+.markup-container-embed-float-right {
+  float: right;
+  margin: .5em 1em 0;
+}
+
+.markup-container-embed-layout-link {
+  padding-left: 20px;
+  background: url(/rsrc/image/icon/fatcow/page_white_put.png) 0 0 no-repeat;
+}
+
+.markup-container-embed-float-left {
+  float: left;
+  margin: .5em 1em 0;
+}
+
+.markup-container-embed-image {
+  display: inline-block;
+  border: 3px solid white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.20);
+}
+
+.markup-container table.remarkup-table {
+  border-collapse:  separate;
+  border-spacing:   1px;
+  background:       #d3d3d3;
+  margin:           1em;
+}
+
+.markup-container table.remarkup-table th {
+  font-weight: bold;
+  padding: 3px 6px;
+  background: #e3e3e3;
+}
+
+.markup-container table.remarkup-table td {
+  background: #ffffff;
+  padding: 3px 6px;
+}
+
+
+.remarkup-assist-textarea {
+  border-width: 1px;
+  border-color: #e5e5e5 #999999 #999999;
+
+  /* Prevent Safari and Chrome users from dragging the textarea any wider,
+     because the top bar won't resize along with it. */
+  resize: vertical;
+}
+
+.remarkup-assist-bar {
+  height: 27px;
+  padding: 0 2px;
+
+  border-width: 1px 1px 0;
+  border-style: solid;
+  border-color: #737373 #999999;
+
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.remarkup-assist-button {
+  display: block;
+  padding: 3px;
+  margin: 2px 1px;
+  float: left;
+
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+.remarkup-assist-button:hover {
+  background: #f7f7f7;
+  border-color: #c6c6c6;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.10);
+}
+
+.remarkup-assist-button:active {
+  outline: none;
+  background: #f3f3f3;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.10);
+}
+
+.remarkup-assist-button:focus {
+  outline: none;
+}
+
+.remarkup-assist-separator {
+  display: block;
+  float: left;
+
+  margin: 7px 4px;
+  height: 14px;
+
+  width: 0px;
+  border-right: 1px solid #cccccc;
+}
+
+.remarkup-assist {
+  display: block;
+  width: 14px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.remarkup-assist-right {
+  float: right;
+}
+
+.phabricator-image-macro-hero {
+  margin: auto;
+  max-width: 95%;
 }
