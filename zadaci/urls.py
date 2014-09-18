@@ -9,7 +9,6 @@ urlpatterns = patterns(
     url(r'^dodaj/$', views.dodaj_zadatak, name='dodaj_zadatak'),
     url(r'^zadaci/$', views.zadaci.as_view(), name='zadaci'),
     url(r'^random/$', views.slucajan_zadatak, name='slucajan_zadatak'),
-    url(r'^tutorijali/$', views.tutorijali, name='tutorijali'),
     url(r'^korisnici/$', views.korisnici.as_view(), name='korisnici'),
     url(r'^uredi_profil/$', views.uredi_profil, name='uredi_profil'),
     url(r'^odjava/$', views.odjava, name='odjava'),
@@ -21,6 +20,10 @@ urlpatterns = patterns(
     # npr. /profil/3/
     url(r'^profil/(?P<pk>\d+)/$', views.profil.as_view(), name='profil'),
 
+    # npr. /tutorijali/art_epsilon/
+    url(r'^tutorijali/(?P<ime_tutorijala>[\w_]+)/$', views.tutorijal,
+        name='tutorijal'),
+
     # npr. /dodaj/3/ (kada korisnik uredjuje zadatak)
     url(r'^dodaj/(?P<zadatak_id>\d+)/$',
         views.dodaj_zadatak, name='dodaj_zadatak'),
@@ -30,5 +33,5 @@ urlpatterns = patterns(
         name='activation_complete'),
 
     url(r'^googleb1fb5ec8a1253530.html', TemplateView.as_view(
-	template_name='googleb1fb5ec8a1253530.html'))
+        template_name='googleb1fb5ec8a1253530.html'))
 )

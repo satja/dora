@@ -271,3 +271,9 @@ def odjava(request):
     """
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def tutorijal(request, ime_tutorijala):
+    """Renderira tutorijal."""
+    template = 'tutorijali/' + ime_tutorijala + '.html'
+    return render(request, template)

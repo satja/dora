@@ -8,6 +8,14 @@ body {
     font-size: 9.5pt;
 }
 
+.remarkup-table {
+    -webkit-filter: invert(100%);
+}
+
+.remarkup-table tbody tr td {
+    color: black;
+}
+
 svg {
     -webkit-filter: invert(100%);
 }
@@ -253,6 +261,10 @@ ul li:before {
 
 li a {
     text-decoration: none;
+}
+
+.markup-container li a {
+    color: #99FF00;
 }
 
 .na_pocetnu {
@@ -501,6 +513,7 @@ li a {
 
 .markup-container {
   line-height: 1.45em;
+  color: white;
 }
 
 .markup-container p {
@@ -526,7 +539,6 @@ li a {
 .markup-container .remarkup-code-block pre {
   background: black;
   display: block;
-  color: #000000;
   overflow: auto;
   padding: .5em 1em;
 }
@@ -537,8 +549,7 @@ li a {
 }
 
 .markup-container tt {
-  color: #333333;
-  background: #f4f4ff;
+  background: black;
   padding: 0 .25em;
   white-space: pre-wrap;
 }
@@ -550,7 +561,6 @@ li a {
 }
 
 .markup-container ul {
-  list-style: disc;
   margin: 1em 0 1em 3em;
 }
 
