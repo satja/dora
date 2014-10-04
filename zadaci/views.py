@@ -129,7 +129,7 @@ class profil(generic.DetailView):
 
         # Sto je korisnik nedavno radio?
         context['nedavno'] = Aktivnost.objects.filter(
-            user=korisnik).order_by('-vrijeme')[:15]
+            user=korisnik).order_by('-vrijeme')[:17]
 
         return context
 
@@ -149,7 +149,7 @@ def homepage(request):
     """
     return render(request, 'zadaci/homepage.html', {
         'obiljezja': ObiljezjaForm(),
-        'nedavno': Aktivnost.objects.all().order_by('-vrijeme')[:15],
+        'nedavno': Aktivnost.objects.all().order_by('-vrijeme')[:17],
     })
 
 
@@ -220,7 +220,7 @@ def dodaj_zadatak(request, zadatak_id=None):
 
     return render(request, 'zadaci/dodaj.html', {
         'form': form,
-        'nedavno': Aktivnost.objects.all().order_by('-vrijeme')[:15],
+        'nedavno': Aktivnost.objects.all().order_by('-vrijeme')[:17],
         'izmjena': izmjena})
 
 
