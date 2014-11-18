@@ -33,6 +33,8 @@ def prepisi(ime, izvorni_html):
 if __name__ == "__main__":
     prepisi('index', 'external/hwop/index.html')
     for path, subdirs, files in os.walk('external/hwop'):
+	if not files:
+		continue
         izvorni_html = os.path.join(path, files[0])
         ime = os.path.split(path)[-1]
         prepisi(ime, izvorni_html)

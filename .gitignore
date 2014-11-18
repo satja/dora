@@ -9,6 +9,8 @@ forum/.svn
 forum/build/
 forum/dist/django_forum-r53-py2.7.egg
 
+zadaci/templates/tutorijali/.git.html
+
 *.ropeproject/*
 .ropeproject/
 *.pyc
