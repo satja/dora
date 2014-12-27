@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'dajaxice',
     'tagging_autocomplete',
     'forum',
+    'passreset',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
-from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 from django.contrib import admin
+import passreset
 
 admin.autodiscover()
 dajaxice_autodiscover()
@@ -17,6 +17,7 @@ urlpatterns = patterns(
     url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^forum/', include('forum.urls')),
+    url(r'^passreset/', include(passreset.urls)),
 )
 
 urlpatterns += staticfiles_urlpatterns()
