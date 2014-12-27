@@ -250,7 +250,6 @@ def uredi_profil(request):
 
 
 def tutorijali(request):
-    """Jos nije u pogonu."""
     return render(request, "zadaci/tutorijali.html")
 
 
